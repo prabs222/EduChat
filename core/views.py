@@ -65,9 +65,10 @@ def home(request):
         Q(host__username__icontains=q) 
                                 )
     room_count = rooms.count()
+    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
     
     topics = Topic.objects.all()
-    context = {"rooms": rooms, "topics": topics,"room_count": room_count}    
+    context = {"rooms": rooms, "topics": topics,"room_count": room_count, "room_messages": room_messages}
     return render(request,'home.html',context)
 
 
@@ -83,10 +84,19 @@ def createRoom(request):
 
     return render(request,'createRoom.html',context)
 
-# @login_required(login_url='login/')
 def room(request,pk):
     room = Room.objects.get(id=pk)
-    context = {"room": room}
+    room_messages = room.message_set.all().order_by('-created')
+    participants = room.participants.all()
+    if request.method == 'POST' and request.user.is_authenticated:
+        addMessage = request.POST.get('message')
+        user = User.objects.get(username = request.user)
+        Message.objects.create(message = addMessage, room=room, user = user)
+        room.participants.add(request.user)
+        messages.success(request,  "message added successfully")
+        return redirect('room',pk)
+    
+    context = {"room": room, "room_messages": room_messages, "participants": participants}
     return render(request,'room.html',context)
 
 @login_required(login_url='login/')
@@ -116,5 +126,19 @@ def deleteRoom(request,pk):
         room.delete()
         return redirect('home')
         
-    return render(request, 'deleteRoom.html', context)
+    return render(request, 'delete.html', context)
+    
+@login_required(login_url='login/')
+def deleteMessage(request,pk):
+    message = Message.objects.get(id=pk)
+    context = {'obj':message}
+    
+    if request.user != message.user:
+        return HttpResponse("You are not allowed to delete this room")
+    
+    if request.method == 'POST':
+        message.delete()
+        return redirect('room',message.room.id)
+        
+    return render(request, 'delete.html', context)
     
