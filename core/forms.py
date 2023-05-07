@@ -4,7 +4,7 @@ from .models import *
 class RoomForm(ModelForm):
     class Meta:
         model = Room
-        fields = ['host', 'topic', 'name','description']
+        fields = [ 'topic', 'name','description']
 
         
         

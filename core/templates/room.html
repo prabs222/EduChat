@@ -47,11 +47,7 @@
     </div>
 
     <div>
-        <h3>Participants</h3>
-        <hr>
-        {% for participant in participants%}
-        <p>@{{participant.username}}</p>
-        {% endfor %}
+{% include 'participants_component.html'%}
     </div>
 
 </div>

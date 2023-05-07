@@ -8,9 +8,12 @@ urlpatterns = [
     path('room/<str:pk>/',room, name='room'),
     path('update-room/<str:pk>/',updateRoom, name='update-room'),
     path('delete-room/<str:pk>/',deleteRoom, name='delete-room'),
+    
     path('login/',loginPage,name = 'login'),
     path('logout/',logoutPage,name = 'logout'),
     path('register/',registerPage,name = 'register'),
+    path('user-profile/<str:pk>/',userProfile, name='user-profile'),
+    
     path('delete-message/<str:pk>/',deleteMessage, name='delete-message'),
 
 
