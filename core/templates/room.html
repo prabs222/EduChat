@@ -12,6 +12,7 @@
 </style>
  
 <div class="room-container">
+    
     <div>
 
 
@@ -35,23 +36,31 @@
             {% endfor %}
 
         </div>
-        {%if request.user.is_authenticated %}
+        {% if request.user.is_authenticated %}
         <div class="comment-form">
             <form action="" method="post">
                 {% csrf_token %}
                 <input type="text" name="message" placeholder="Write your message here" />
                 <input type="submit" value="Comment" />
             </form>
-
         </div>
+        {% endif %}
+
     </div>
 
     <div>
-{% include 'participants_component.html'%}
+        <h3>Participants</h3>
+        <hr>
+        {% for participant in participants%}
+        <a href="{% url 'user-profile' participant.id %}">
+            <p>@{{participant.username}}</p>
+            
+        </a>
+        <hr>
+        {% endfor %}    
     </div>
 
 </div>
 
-{% endif %}
 
 {% endblock%}
