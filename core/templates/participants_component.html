@@ -1,9 +1,19 @@
 {% load static %}
-<h3>Participants</h3>
-<hr>
-{% for participant in participants%}
-<a href="{% url 'user-profile' participant.id %}">
-    <p>@{{participant.username}}</p>
 
-</a>
-{% endfor %}
+<div class="participants">
+    <h3 class="participants__top">Participants <span>(5.3k Joined)</span></h3>
+    <div class="participants__list scroll">
+        {% for participant in participants%}
+
+      <a href="{% url 'user-profile' participant.id %}" class="participant">
+        <div class="avatar avatar--medium">
+          <img src="https://randomuser.me/api/portraits/men/37.jpg" />
+        </div>
+        <p>
+            {{participant.username}}
+          <span>@{{participant.username}}</span>
+        </p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
