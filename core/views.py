@@ -144,7 +144,7 @@ def deleteMessage(request,pk):
     context = {'obj':message}
     
     if request.user != message.user:
-        return HttpResponse("You are not allowed to delete this room")
+        return HttpResponse("You cannot delete this room")
     
     if request.method == 'POST':
         message.delete()
