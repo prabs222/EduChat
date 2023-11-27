@@ -1,16 +1,16 @@
 {% load static %}
 
 <div class="participants">
-    <h3 class="participants__top">Participants <span>(5.3k Joined)</span></h3>
+    <h3 class="participants__top">Participants <span>({{participants.count}} Joined)</span></h3>
     <div class="participants__list scroll">
         {% for participant in participants%}
 
       <a href="{% url 'user-profile' participant.id %}" class="participant">
         <div class="avatar avatar--medium">
-          <img src="https://randomuser.me/api/portraits/men/37.jpg" />
+          <img src="{{participant.avatar.url}}" />
         </div>
         <p>
-            {{participant.username}}
+            {{participant.name}}
           <span>@{{participant.username}}</span>
         </p>
       </a>
