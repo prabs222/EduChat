@@ -27,7 +27,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG")
 
-ALLOWED_HOSTS = ['educhat-mjhy.onrender.com']
+ALLOWED_HOSTS = ['educhat-mjhy.onrender.com','127.0.0.1']
 
 
 # Application definition
@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'DissIt.urls'
@@ -140,7 +141,7 @@ AUTH_USER_MODEL = 'core.User'
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 
-STATIC_ROOT =  BASE_DIR / 'static/'
+# STATIC_ROOT =  BASE_DIR / 'static/'
 
 STATICFILES_DIRS = [ BASE_DIR / 'static']
 
