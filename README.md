@@ -5,3 +5,5 @@ Unite, Communicate, EduChat: Amplify your connections!
 https://educhat-mjhy.onrender.com/
 
 ## Connect, make rooms and ask your doubts
+
+### Feel free to raise any issue 
